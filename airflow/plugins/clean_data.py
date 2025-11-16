@@ -4,7 +4,7 @@ import pandas as pd
 def clean_data():
 
     # Load raw data into DataFrame  
-    data = pd.read_csv('/tmp/xrate.csv', header=None)
+    data = pd.read_csv('/tmp/xrate.csv', header=0)
 
     # Cleanse Data
     default_values = {
