@@ -1,0 +1,11 @@
+employee_id,first_name,last_name,department,role,salary,join_date
+1,John,Doe,Engineering,Software Engineer,70000,2020-03-15
+2,Jane,Smith,Marketing,Marketing Manager,65000,2019-07-22
+3,Bob,Johnson,Sales,Sales Executive,60000,2021-01-10
+4,Alice,Williams,HR,HR Manager,72000,2018-11-05
+5,Michael,Brown,Finance,Accountant,58000,2022-05-30
+6,Linda,Davis,Engineering,DevOps Engineer,75000,2021-09-12
+7,James,Miller,Engineering,Software Engineer,68000,2020-12-01
+8,Susan,Wilson,Marketing,Content Strategist,63000,2019-04-17
+9,David,Moore,Sales,Sales Manager,80000,2017-08-25
+10,Karen,Taylor,Finance,Financial Analyst,61000,2021-03-19

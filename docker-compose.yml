@@ -1,0 +1,15 @@
+version: '3'
+services:
+  amila-airflow:
+    image: amila-airflow:latest
+    
+    volumes:
+      - ./airflow:/opt/airflow
+
+    ports:
+      - "8080:8080"
+    command: airflow standalone
+
+  amila-smtp:
+    image: bytemark/smtp
+    restart: always
