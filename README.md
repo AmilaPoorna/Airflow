@@ -38,3 +38,27 @@ Runs daily at 21:00. Uses `GithubOperator` to call GitHub’s `get_repo` method 
 Runs daily at 23:00. Downloads live exchange rate data and sends a notification email upon success. Here `web_api_key` and `support_email` are variables defined in Airflow UI.
 
 ## profit_uk.py
+Runs daily at 21:00. Uses `profit_uk.sql` in the sqls folder within the DAGs folder to create or replace a table named `profit_uk` in the `L1_LANDING` schema of the `AIRFLOW` repository, based on the `sales_uk` table in the same schema and repository in Snowflake. Upon success, a notification email is sent. Here the sales date range (`process_interval`) is defined as a variable and Snowflake connection (`snowflake_conn`) is defined as a connection in the Airflow UI.
+
+**Note:** You can start a 30-day free Snowflake trial, which includes $400 of free usage, if you don’t already have a Snowflake account.
+
+## empdata_process.py
+Runs daily at 23:00. Uses a sensor that waits for the file, poking every 10 seconds for up to 5 hours. When the employee_details.csv file exists in the data folder, it uploads the local file to the AIRFLOW.L1_LANDING.MY_LOCAL_STAGE stage in Snowflake. In the original tutorial, the DAG checked for the file in an S3 bucket on AWS.
+
+## xrate_to_local.py
+This DAG runs daily at 23:00. It automatically downloads the exchange rate data as a JSON file and stores it in the fetched_xrates folder, then uploads it to the uploaded_xrates folder inside the data folder.
+
+## trigger_rules.py
+Defines three upstream tasks (`task_a`, `task_b`, `task_c`) that simulate failures, a downstream `task_d` configured with `trigger_rule='all_failed'` which runs only when all upstream tasks fail, and a final `task_e` that runs after `task_d`.
+
+## conditional_branching.py
+Checks the file size of `source_file_extrat.dat` in the tmp folder inside the dags folder. If the file size is greater than approximately 10.74B, it branches to the parallel transformation/load path; otherwise, it branches to the serial transformation/load path.
+
+## setup_teardown.py
+Creates a resource (`create_cluster`), runs several query tasks, and then deletes the resource via a teardown (`delete_cluster`) linked to the setup task.
+
+## LatestOnly.py
+Ensures that a notification email is sent on success only for the latest DAG run, while a notification email is always sent on failure.
+
+## DependsOnPast.py
+One task (`task_b`) is configured with `depends_on_past=True`, causing it to wait for the previous DAG run’s corresponding task instance to succeed before running in the current schedule.
